@@ -1,0 +1,585 @@
+# ============================================================
+# TaskFlow API - Colección de pruebas (Thunder Client / REST Client)
+# IMPORTANTE:Los ids utilizados son los de nuestra base de datos.
+# ============================================================
+
+TaskFlow API - Resultados de Pruebas de Endpoints (REST / Postman)
+Documento de resultados esperados para la colección de pruebas de Postman / Thunder Client.
+Configuración del Entorno
+
+Variables de Entorno
+------------------------------------------------------------------------
+Variable                              Valor
+========================================================================
+host                                  http://localhost:3000/api
+teamId                                6ac2ba51aad46d17032b0810
+userId                                6ac2b65eedfda51d8b0f8a5e
+taskId                                6ac2e691aad46d17032b0819
+
+1. General
+Petición 1: Saludo de la API
+Método / URL: GET {{host}}
+Status: 200 OK
+Respuesta:
+
+{
+
+  "success": true,
+  "message": "Bienvenido a TaskFlow API",
+  "endpoints": [
+    "/api/users",
+    "/api/teams",
+    "/api/tasks"
+  ]
+
+}
+2. Módulo de Equipos (Teams)
+Petición 2: Crear equipo
+Método / URL: POST {{host}}/teams
+Status: 201 Created
+Respuesta:
+
+{
+
+  "success": true,
+  "data": {
+    "_id": "6ac2ba51aad46d17032b0820",
+    "name": "Backend",
+    "description": "API y base de datos",
+    "createdAt": "2026-10-05T01:41:38.000Z"
+  }
+
+}
+Petición 3: Listar equipos
+Método / URL: GET {{host}}/teams
+Status: 200 OK
+Respuesta:
+
+{
+  "success": true,
+  "count": 3,
+  "data": [
+    {
+      "_id": "6ac2ba51aad46d17032b0810",
+      "name": "Backend",
+      "description": "Equipo de desarrollo de APIs",
+      "createdAt": "2026-10-04T20:42:57.734Z",
+      "miembros": [
+        "6ac2b0f1edfda51d8b0f8a53",
+        "6ac2b2b4edfda51d8b0f8a54",
+        "6ac2b352edfda51d8b0f8a55",
+        "6ac2b65eedfda51d8b0f8a5e"
+      ]
+
+    },
+
+    {
+      "_id": "6ac2e84eaad46d17032b081a",
+      "name": "Frontend",
+      "description": "Equipo de desarrollo de APIs",
+      "createdAt": "2026-10-04T23:59:10.689Z",
+      "miembros": [
+        "6ac2b2b4edfda51d8b0f8a54"
+      ]
+
+    },
+
+    {
+      "_id": "6ac2e99aaad46d17032b081b",
+      "name": "DevOps",
+      "description": "Equipo de desarrollo de APIs",
+      "createdAt": "2026-10-05T00:04:42.649Z",
+      "miembros": [
+        "6ac2b0f1edfda51d8b0f8a53"
+      ]
+    }
+  ]
+
+}
+Petición 4: Obtener un equipo
+Método / URL: GET {{host}}/teams/6ac2ba51aad46d17032b0810
+Status: 200 OK
+Respuesta:
+
+{
+  "success": true,
+  "data": {
+    "_id": "6ac2ba51aad46d17032b0810",
+    "name": "Backend",
+    "description": "Equipo de desarrollo de APIs",
+    "createdAt": "2026-10-04T20:42:57.734Z",
+    "miembros": [
+      "6ac2b0f1edfda51d8b0f8a53",
+      "6ac2b2b4edfda51d8b0f8a54",
+      "6ac2b352edfda51d8b0f8a55",
+      "6ac2b65eedfda51d8b0f8a5e"
+    ]
+  }
+
+}
+Petición 5: Actualizar equipo
+Método / URL: PUT {{host}}/teams/6ac2ba51aad46d17032b0810
+Status: 200 OK
+Respuesta:
+
+{
+  "success": true,
+  "data": {
+    "_id": "6ac2ba51aad46d17032b0810",
+    "name": "Backend",
+    "description": "API, base de datos y DevOps",
+    "createdAt": "2026-10-04T20:42:57.734Z",
+    "miembros": [
+      "6ac2b0f1edfda51d8b0f8a53",
+      "6ac2b2b4edfda51d8b0f8a54",
+      "6ac2b352edfda51d8b0f8a55",
+      "6ac2b65eedfda51d8b0f8a5e"
+
+    ]
+
+  }
+
+}
+Petición 6: Agregación - Tareas por estado de un equipo
+Método / URL: GET {{host}}/teams/6ac2ba51aad46d17032b0810/stats
+Status: 200 OK
+Respuesta:
+
+{
+
+  "success": true,
+  "teamId": "6ac2ba51aad46d17032b0810",
+  "stats": [
+    {
+
+      "status": "to do",
+      "count": 1
+    },
+
+    {
+      "status": "in-progress",
+      "count": 2
+    },
+
+    {
+      "status": "done",
+      "count": 1
+    }
+  ]
+
+}
+Petición 7: Eliminar equipo
+Método / URL: DELETE {{host}}/teams/6ac2ba51aad46d17032b0810
+Status: 200 OK
+Respuesta:
+
+{
+  "success": true,
+  "message": "Equipo eliminado correctamente",
+  "data": {}
+}
+
+3. Módulo de Usuarios (Users)
+Petición 8: Crear usuario
+Método / URL: POST {{host}}/users
+Status: 201 Created
+Respuesta:
+
+{
+
+  "success": true,
+
+  "data": {
+
+    "_id": "6ac2b65eedfda51d8b0f8a6f",
+
+    "name": "Carlos Pérez",
+
+    "email": "carlos@taskflow.com",
+
+    "role": "developer",
+
+    "teamId": "6ac2ba51aad46d17032b0810"
+
+  }
+
+}
+Petición 9: Listar usuarios
+Método / URL: GET {{host}}/users
+Status: 200 OK
+Respuesta:
+
+{
+
+  "success": true,
+
+  "count": 4,
+
+  "data": [
+
+    {
+
+      "_id": "6ac2b0f1edfda51d8b0f8a53",
+
+      "nombre": "María López",
+
+      "email": "maria@taskflow.com",
+
+      "rol": "developer"
+
+    },
+
+    {
+
+      "_id": "6ac2b2b4edfda51d8b0f8a54",
+
+      "nombre": "Juan López",
+
+      "email": "Juan@taskflow.com",
+
+      "rol": "Frontend"
+
+    },
+
+    {
+
+      "_id": "6ac2b352edfda51d8b0f8a55",
+
+      "nombre": "Diego Martínez",
+
+      "email": "diego@taskflow.com",
+
+      "rol": "Backend"
+
+    },
+
+    {
+
+      "_id": "6ac2b65eedfda51d8b0f8a5e",
+
+      "nombre": "Alexander Marte",
+
+      "email": "Alexander@taskflow.com",
+
+      "rol": "Backend"
+
+    }
+
+  ]
+
+}
+Petición 10: Obtener un usuario
+Método / URL: GET {{host}}/users/6ac2b65eedfda51d8b0f8a5e
+Status: 200 OK
+Respuesta:
+
+{
+
+  "success": true,
+
+  "data": {
+
+    "_id": "6ac2b65eedfda51d8b0f8a5e",
+
+    "nombre": "Alexander Marte",
+
+    "email": "Alexander@taskflow.com",
+
+    "rol": "Backend",
+
+    "perfil": {
+
+      "avatar": "https://cdn/maria.png",
+
+      "bio": "Full Stack Dev",
+
+      "telefono": "+1-849-555-0011"
+
+    }
+
+  }
+
+}
+Petición 11: Actualizar usuario
+Método / URL: PUT {{host}}/users/6ac2b65eedfda51d8b0f8a5e
+Status: 200 OK
+Respuesta:
+
+{
+
+  "success": true,
+
+  "data": {
+
+    "_id": "6ac2b65eedfda51d8b0f8a5e",
+
+    "nombre": "Alexander Marte",
+
+    "email": "Alexander@taskflow.com",
+
+    "role": "admin",
+
+    "perfil": {
+
+      "avatar": "https://cdn/maria.png",
+
+      "bio": "Full Stack Dev",
+
+      "telefono": "+1-849-555-0011"
+
+    }
+
+  }
+
+}
+Petición 12: ERROR 409 - Email duplicado
+Método / URL: POST {{host}}/users
+Status: 409 Conflict
+Respuesta:
+
+{
+
+  "success": false,
+
+  "error": "El correo electrónico ya está registrado en el sistema"
+
+}
+Petición 13: ERROR 400 - Email inválido
+Método / URL: POST {{host}}/users
+Status: 400 Bad Request
+Respuesta:
+
+{
+
+  "success": false,
+
+  "error": "Por favor ingrese un correo electrónico válido"
+
+}
+Petición 14: Eliminar usuario
+Método / URL: DELETE {{host}}/users/6ac2b65eedfda51d8b0f8a5e
+Status: 200 OK
+Respuesta:
+
+{
+
+  "success": true,
+
+  "message": "Usuario eliminado correctamente",
+
+  "data": {}
+
+}
+4. Módulo de Tareas (Tasks)
+Petición 15: Crear tarea
+Método / URL: POST {{host}}/tasks
+Status: 201 Created
+Respuesta:
+
+{
+
+  "success": true,
+
+  "data": {
+
+    "_id": "6ac2e691aad46d17032b0821",
+
+    "title": "Implementar autenticación JWT",
+
+    "status": "in-progress",
+
+    "priority": 5,
+
+    "teamId": "6ac2ba51aad46d17032b0810",
+
+    "assignedTo": "6ac2b65eedfda51d8b0f8a5e",
+
+    "createdAt": "2026-10-05T01:41:38.000Z"
+
+  }
+
+}
+Petición 16: Consulta avanzada - Listar con filtros, orden y paginación
+Método / URL: GET {{host}}/tasks?status=in-progress&sort=-priority&page=1&limit=5
+Status: 200 OK
+Respuesta:
+
+{
+
+  "success": true,
+
+  "count": 2,
+
+  "pagination": {
+
+    "total": 2,
+
+    "page": 1,
+
+    "limit": 5,
+
+    "totalPages": 1
+
+  },
+
+  "data": [
+
+    {
+
+      "_id": "6ac2e691aad46d17032b0818",
+
+      "title": "Integrar con MongoDB",
+
+      "status": "in-progress",
+
+      "team": "Backend",
+
+      "assignedTo": "user_123",
+
+      "prioridad": 5,
+
+      "sprint": "S2"
+
+    },
+
+    {
+
+      "_id": "6ac2e691aad46d17032b0816",
+
+      "title": "Crear endpoints REST",
+
+      "status": "in-progress",
+
+      "team": "Backend",
+
+      "assignedTo": "user_123",
+
+      "prioridad": 4,
+
+      "sprint": "S2"
+
+    }
+
+  ]
+
+}
+Petición 17: Obtener una tarea
+Método / URL: GET {{host}}/tasks/6ac2e691aad46d17032b0819
+Status: 200 OK
+Respuesta:
+
+{
+
+  "success": true,
+
+  "data": {
+
+    "_id": "6ac2e691aad46d17032b0819",
+
+    "title": "Pruebas unitarias API",
+
+    "status": "to do",
+
+    "team": "QA",
+
+    "assignedTo": "user_321",
+
+    "prioridad": 3,
+
+    "sprint": "S3"
+
+  }
+
+}
+Petición 18: ERROR 400 - Prioridad fuera de rango
+Método / URL: POST {{host}}/tasks
+Status: 400 Bad Request
+Respuesta:
+
+{
+
+  "success": false,
+
+  "error": "La prioridad debe estar entre 1 y 5"
+
+}
+Petición 19: ERROR 400 - Estado inválido
+Método / URL: POST {{host}}/tasks
+Status: 400 Bad Request
+Respuesta:
+
+{
+
+  "success": false,
+
+  "error": "`casi-lista` no es un valor permitido para el campo de estado (status)"
+
+}
+Petición 20: Marcar tarea como terminada
+Método / URL: PUT {{host}}/tasks/6ac2e691aad46d17032b0819
+Status: 200 OK
+Respuesta:
+
+{
+
+  "success": true,
+
+  "data": {
+
+    "_id": "6ac2e691aad46d17032b0819",
+
+    "title": "Pruebas unitarias API",
+
+    "status": "done",
+
+    "team": "QA",
+
+    "assignedTo": "user_321",
+
+    "prioridad": 3,
+
+    "sprint": "S3",
+
+    "completedAt": "2026-10-05T01:41:38.000Z"
+
+  }
+
+}
+Petición 21: ERROR 404 - Tarea inexistente
+Método / URL: GET {{host}}/tasks/000000000000000000000000
+Status: 404 Not Found
+Respuesta:
+
+{
+
+  "success": false,
+
+  "error": "No se encontró ningún recurso con el ID especificado"
+
+}
+Petición 22: ERROR 400 - Id inválido
+Método / URL: GET {{host}}/tasks/abc123
+Status: 400 Bad Request
+Respuesta:
+
+{
+
+  "success": false,
+
+  "error": "Formato de ID inválido para ObjectId de MongoDB: abc123"
+
+}
+Petición 23: Eliminar tarea
+Método / URL: DELETE {{host}}/tasks/6ac2e691aad46d17032b0819
+Status: 200 OK
+Respuesta:
+
+{
+
+  "success": true,
+
+  "message": "Tarea eliminada correctamente",
+
+  "data": {}
+
+}

@@ -1,0 +1,13 @@
+# Variables de entorno (NUNCA se deben de subir credenciales)
+.env
+
+# Node
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Sistema
+.DS_Store
+Thumbs.db
